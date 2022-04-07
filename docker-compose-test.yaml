@@ -1,0 +1,22 @@
+version: "3"
+services:
+  res_node:
+    image: "local/res_node:latest"
+    container_name: res_node
+    restart: unless-stopped
+    networks:
+      - bridge
+    build: .
+    ports:
+      - 17909:17909
+    volumes:
+      - /data/mserver/resource/node/res:/app/res
+    entrypoint:
+      - "./uresnode"
+      - "-f"
+      - "etc/uresnode-api-test.yaml"
+
+networks:
+  bridge:
+    external:
+      name: "bridge"

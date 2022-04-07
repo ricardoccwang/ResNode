@@ -1,0 +1,49 @@
+Name: UResNode-api
+Host: 0.0.0.0
+Port: 8888
+
+MaxBytes: 10485760
+
+Log:
+  ServiceName: RMSCollector  #  服务器名
+  Mode: console #               string `json:",default=console,options=console|file|volume"`
+  TimeFormat: 2006-01-02T15:04:05.000Z07 #          string `json:",optional"`   # 日志时间格式
+  Path: logs        #        string `json:",default=logs"`   # 日志目录
+  Level: info       #        string `json:",default=info,options=info|error|severe"`   日志等级
+  Compress: true     #        bool   `json:",optional"`  是否进行压缩，默认值为false, file模式下会压缩成.gz文件
+  KeepDays: 30    #        int    `json:",optional"`   最大保留天数，默认值为0，表示不会删除旧的日志，file模式下，超过最大保留天数，旧的日志文件会被删除
+  StackCooldownMillis: 100 #int    `json:",default=100"` 日志输出时间间隔
+
+Node:
+  NID: "f12345"
+  NName: "我是本地测试节点"
+  NType: "node" #string // server/node  这两种类型
+  NHost: "172.20.65.97" # string // 访问节点的Host
+  NPort: 8888 # int64 // 访问节点的port
+  NHType: "http" # string // 是http 还是 https 还是 oss 还是 obs
+  NSKey: "" # string // 访问节点需要的apitoken的key（如果有的话）
+  NSSecret: "" # string // 访问节点需要的apitoken的secret (如果有的话）
+  NProviderName: "" # string // 附加信息，会显示是ali/huawei/tencent/aws/azure等
+  NVersion: "V1.0" #string // 访问节点的版本
+
+Root: "D:/tools"
+
+ResServer:
+  Type: "http"
+  Host: "127.0.0.1"
+  Port: 8999
+  EncryptKey: "sSI1!zP7X9ypJE@HBJ6kblaB$wmYNc!h"
+
+ResNode:
+  RNUrl: ""
+  RNHost: "172.20.65.72"
+  RNPort: 8998
+  RNHType: "http"
+
+Telemetry:
+  Name: ResNodeDev
+  Endpoint: "https://tracezp.urithub.com/api/v2/spans"
+  Batcher: "zipkin"
+  Sampler: 1.0
+
+Version: V1.0.2.20220108171400

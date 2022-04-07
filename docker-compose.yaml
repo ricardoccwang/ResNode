@@ -1,0 +1,23 @@
+version: "3"
+services:
+  res_node:
+    image: "172.20.130.179:14005/res_node:latest"
+    container_name: res_node
+    restart: unless-stopped
+    networks:
+      - normal
+    build: .
+    ports:
+      - 17909:8888
+    volumes:
+      - /data/mserver/resource/node/res:/app/res
+      - /var/log/res_node:/app/logs
+    entrypoint:
+      - "./uresnode"
+      - "-f"
+      - "etc/uresnode-api-release.yaml"
+
+networks:
+  normal:
+    external:
+      name: "normal"

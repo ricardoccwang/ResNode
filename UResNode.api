@@ -1,0 +1,38 @@
+type GeneralResponse {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type (
+	UploadResReq {
+		Signature string `form:"signature"`
+		FileName  string `form:"file_name"`
+	}
+
+	UploadResResp {
+		GeneralResponse
+		Name          string `json:"name"`           // 文件名
+		FileUrl       string `json:"file_url"`       // 文件的下载地址
+		FileSignature string `json:"file_signature"` // 文件的标识值
+		FileSize      int64  `json:"file_size"`      // 文件大小
+	}
+)
+
+@server(
+	group: resServer
+)
+service UResNode-api {
+	@handler UploadRes
+	post /upload/res(UploadResReq)	returns(UploadResResp)
+	
+	@handler Health
+	options /health returns ()
+}
+
+@server (
+	group: test
+)
+service UResNode-api {
+	@handler testRefreshToken
+	post /test/refresh()
+}
